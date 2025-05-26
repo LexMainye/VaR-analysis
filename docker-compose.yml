@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  fin-app:
+    build: .
+    container_name: julia-fin-engineering
+    volumes:
+      # Mount X11 socket for GUI
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      # Mount your data directory
+      - ./data:/fin_engineering/data
+      # Mount output directory for plots
+      - ./output:/fin_engineering/output
+    environment:
+      - DISPLAY=${DISPLAY}
+      - JULIA_NUM_THREADS=auto
+    network_mode: host
+    stdin_open: true
+    tty: true
+    # Add capabilities for GUI applications
+    cap_add:
+      - SYS_PTRACE
+    security_opt:
+      - seccomp:unconfined
+    restart: unless-stopped
+
+  # Optional: Jupyter notebook service for development
+  jupyter:
+    build: .
+    container_name: julia-jupyter
+    ports:
+      - "8888:8888"
+    volumes:
+      - .:/fin_engineering
+    command: >
+      bash -c "julia -e 'using Pkg; Pkg.add(\"IJulia\"); using IJulia; installkernel(\"Julia\")' &&
+               jupyter notebook --ip=0.0.0.0 --port=8888 --no-browser --allow-root --NotebookApp.token=''"
+    profiles:
+      - jupyter
