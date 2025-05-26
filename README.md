@@ -3,7 +3,10 @@
 This application provides a comprehensive tool for calculating and visualizing Value at Risk metrics using Julia.
 
 ## Interface
-![Application Interface](images/interface.png)
+![Application Interface](https://github.com/LexMainye/VaR-analysis/blob/8b1850d4b819ce9d3a7f2dfad2c6c69011b42623/images/Screenshot%20from%202025-05-26%2015-05-17.png)
+
+## Output
+![Application Interface](https://github.com/LexMainye/VaR-analysis/blob/8b1850d4b819ce9d3a7f2dfad2c6c69011b42623/images/Screenshot%20from%202025-05-26%2015-08-26.png)
 
 ## Analysis Visualization
 ![Value at Risk Analysis](plots/var_analysis.png)
